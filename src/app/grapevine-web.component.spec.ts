@@ -15,8 +15,4 @@ describe('App: GrapevineWeb', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should have as title \'grapevine-web works!\'',
-      inject([GrapevineWebAppComponent], (app: GrapevineWebAppComponent) => {
-    expect(app.title).toEqual('grapevine-web works!');
-  }));
 });

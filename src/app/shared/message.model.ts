@@ -15,7 +15,7 @@ export class Message {
     latest: MessagePreview;
     date: Date;
     
-    constructor(parameters) {
+    constructor() {
         
     }
 }

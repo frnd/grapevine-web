@@ -7,6 +7,7 @@ import { MD_RADIO_DIRECTIVES } from '@angular2-material/radio';
 import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 import { Message } from './shared'
+import { MessageEditorComponent } from './message-editor/message-editor.component';
 
 @Component({
   moduleId: module.id,
@@ -20,11 +21,13 @@ import { Message } from './shared'
     MD_INPUT_DIRECTIVES,
     MD_RADIO_DIRECTIVES,
     MD_TOOLBAR_DIRECTIVES,
-    MD_GRID_LIST_DIRECTIVES
+    MD_GRID_LIST_DIRECTIVES,
+    MessageEditorComponent
   ],
   providers: [MdIconRegistry]
 })
 export class GrapevineWebAppComponent {
+  formShowing: boolean = false;
   latest: Message[] = [
     {id: '1', user: "Pote", uri: '', title: 'Noticia 1', text: '1234', thumbnail: '', tags: null , root: '1' , latest: null , date: new Date() },
     {id: '2', user: "Pepe", uri: '', title: 'Noticia 2', text: 'qwer', thumbnail: '', tags: null , root: '2' , latest: null , date: new Date() },

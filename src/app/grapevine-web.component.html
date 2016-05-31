@@ -1,7 +1,14 @@
 <md-toolbar color="primary">
   Grapevine
   <span class="app-toolbar-filler"></span>
+  <button md-fab (click)="formShowing=!formShowing">
+      <md-icon>add</md-icon>
+    </button>
 </md-toolbar>
+
+<div class="form" *ngIf="formShowing">
+  <gv-message-editor [wizard]="false"></gv-message-editor>
+</div>
 
 <div class="card-container">
   <md-card *ngFor="let msg of latest">

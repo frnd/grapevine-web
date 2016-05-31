@@ -4,6 +4,13 @@ md-card {
   margin: 16px;
 }
 
+[md-fab] {
+  position: absolute;
+  right: 3%;
+  top: 34px;
+  z-index: 1;
+}
+
 [md-mini-fab] {
   position: absolute;
   right: -10px;

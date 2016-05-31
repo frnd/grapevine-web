@@ -1,0 +1,22 @@
+<md-card>
+  <md-card-title>Create your dog's profile</md-card-title>
+  <md-card-content>
+    <div>
+      <form>
+        <div>
+          <md-input placeholder="Url" [(ngModel)]="message.url"></md-input>
+          <button md-raised-button color="accent" (click)="getEmbedlyData()" *ngIf="wizard">GET</button>
+        </div>
+        <div *ngIf="(wizard && crawled) || !wizard">
+          <md-input placeholder="Title" [(ngModel)]="message.title"></md-input>
+          <md-input placeholder="{{wizard ? 'Description' : 'Text'}}" [(ngModel)]="message.text"></md-input>
+          <md-input placeholder="Tags" [(ngModel)]="tags"></md-input>
+          <p *ngIf="embedly">Information provided by Embedly</p>
+        </div>
+      </form>
+    </div>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button md-raised-button color="accent">POST</button>
+  </md-card-actions>
+</md-card>

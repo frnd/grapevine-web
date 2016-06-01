@@ -47,6 +47,7 @@ const barrels: string[] = [
   'app/shared',
   'app/new-cmp',
   'app/message-editor',
+  'app/message-detail',
   /** @cli-barrel */
 ];
 

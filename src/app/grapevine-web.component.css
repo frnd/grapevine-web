@@ -1,5 +1,6 @@
 md-card {
-  width: (100% - 42px);
+  flex-basis:auto;
+  width: 100px;
   box-sizing: border-box;
   margin: 16px;
 }
@@ -20,5 +21,8 @@ md-card {
 
 .card-container {
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
 }

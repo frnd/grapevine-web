@@ -13,12 +13,13 @@
 <div class="card-container">
   <md-card *ngFor="let msg of latest">
     <md-card-header>
-      <img md-card-avatar src="assets/img.png">
+      <img md-card-avatar src="images/user_male.png">
       <md-card-title>{{msg.title}}</md-card-title>
       <md-card-subtitle>{{msg.user}}</md-card-subtitle>
     </md-card-header>
+      <img md-card-image src="images/image.png"> 
     <md-card-content>
-      <img md-card-md-image src="assets/img.png"> {{msg.text}}
+      {{msg.text}}
     </md-card-content>
     <md-card-actions align="end">
       <button md-mini-fab>

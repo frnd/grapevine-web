@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
+import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
@@ -8,6 +10,8 @@ import { MD_TOOLBAR_DIRECTIVES } from '@angular2-material/toolbar';
 import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 import { Message } from './shared'
 import { MessageEditorComponent } from './message-editor/message-editor.component';
+import { MessageDetailComponent } from './message-detail/message-detail.component';
+import { MessagesService } from './messages.service';
 
 @Component({
   moduleId: module.id,
@@ -24,14 +28,20 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     MD_GRID_LIST_DIRECTIVES,
     MessageEditorComponent
   ],
-  providers: [MdIconRegistry]
+  providers: [MdIconRegistry, MessagesService]
 })
-export class GrapevineWebAppComponent {
+@Routes([
+  { path: '/messages/:id', component: MessageDetailComponent }
+])
+export class GrapevineWebAppComponent implements OnInit {
+
+  constructor(private messagesService: MessagesService) {
+  }
+
+  ngOnInit() {
+    this.messagesService.getMessages(0, 0).then(data => this.latest = data.content);
+  }
+
   formShowing: boolean = false;
-  latest: Message[] = [
-    {id: '1', user: "Pote", uri: '', title: 'Noticia 1', text: '1234', thumbnail: '', tags: null , root: '1' , latest: null , date: new Date() },
-    {id: '2', user: "Pepe", uri: '', title: 'Noticia 2', text: 'qwer', thumbnail: '', tags: null , root: '2' , latest: null , date: new Date() },
-    {id: '3', user: "Risi", uri: '', title: 'Noticia 3', text: 'asdf', thumbnail: '', tags: null , root: '3' , latest: null , date: new Date() },
-    {id: '4', user: "Vivi", uri: '', title: 'Noticia 4', text: 'fhgkjf', thumbnail: '', tags: null , root: '4' , latest: null , date: new Date() },
-  ];
+  latest: Message[];
 }

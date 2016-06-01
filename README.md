@@ -7,6 +7,7 @@ See [grapevine-server](https://www.github.com/frnd/grapevine-server)
 
 # ROAD MAP
 
+ - User autentication
  - Service to read data.
  - Create new message directive
  - Integrate Embedly or similar.

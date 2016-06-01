@@ -4,7 +4,7 @@
     <div>
       <form>
         <div>
-          <md-input placeholder="Url" [(ngModel)]="message.url"></md-input>
+          <md-input placeholder="Url" [(ngModel)]="message.uri"></md-input>
           <button md-raised-button color="accent" (click)="getEmbedlyData()" *ngIf="wizard">GET</button>
         </div>
         <div *ngIf="(wizard && crawled) || !wizard">
@@ -17,6 +17,6 @@
     </div>
   </md-card-content>
   <md-card-actions align="end">
-    <button md-raised-button color="accent">POST</button>
+    <button md-raised-button color="accent" (click)="save()">POST</button>
   </md-card-actions>
 </md-card>

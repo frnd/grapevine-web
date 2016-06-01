@@ -4,6 +4,7 @@ import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdInput} from '@angular2-material/input';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import { Message } from '../shared';
+import { MessagesService } from '../messages.service';
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import { Message } from '../shared';
     MdInput,
     MdIcon
   ],
-  providers: [MdIconRegistry],
+  providers: [MdIconRegistry, MessagesService],
   
 })
 export class MessageEditorComponent implements OnInit {
@@ -26,7 +27,9 @@ export class MessageEditorComponent implements OnInit {
   @Input('wizard') wizard: boolean;
   crawled: boolean = false;
   
-  constructor() {}
+  constructor(private messagesService: MessagesService) {
+    
+  }
 
   ngOnInit() {
   }
@@ -38,6 +41,10 @@ export class MessageEditorComponent implements OnInit {
     this.embedly = true;
     this.message.title = "Lorem ipsum";
     this.message.text = "lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsum";
+  }
+  
+  save (){
+    this.messagesService.save(this.message).then(()=> this.message= new Message());
   }
 
 }

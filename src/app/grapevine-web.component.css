@@ -1,8 +1,8 @@
 md-card {
   flex-basis:auto;
-  width: 100px;
+  width: 32%;
   box-sizing: border-box;
-  margin: 16px;
+  margin: 5px;
 }
 
 [md-fab] {

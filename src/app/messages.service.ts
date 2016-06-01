@@ -24,7 +24,7 @@ export class MessagesService {
   }
 
   getMessage(id: string): Promise<Message> {
-    return this.http.get(environment.api.messages +  '/' + id)
+    return this.http.get(environment.api.messages + '/' + id)
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
@@ -33,7 +33,9 @@ export class MessagesService {
   save(message: Message): Promise<Message> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.api.messages, JSON.stringify(message), headers)
+    return this.http.post(environment.api.messages, JSON.stringify(message), {
+      headers: headers
+    })
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);

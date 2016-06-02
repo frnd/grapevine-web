@@ -44,4 +44,9 @@ export class GrapevineWebAppComponent implements OnInit {
 
   formShowing: boolean = false;
   latest: Message[];
+  
+  onMessageCreated(){
+    this.formShowing = false;
+    this.ngOnInit();
+  }
 }

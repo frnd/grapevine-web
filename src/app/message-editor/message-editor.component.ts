@@ -1,4 +1,4 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {MdButton} from '@angular2-material/button';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdInput} from '@angular2-material/input';
@@ -18,7 +18,7 @@ import { MessagesService } from '../messages.service';
     MdIcon
   ],
   providers: [MdIconRegistry, MessagesService],
-  
+
 })
 export class MessageEditorComponent implements OnInit {
   message: Message = new Message();
@@ -26,25 +26,29 @@ export class MessageEditorComponent implements OnInit {
   embedly: boolean = false;
   @Input('wizard') wizard: boolean;
   crawled: boolean = false;
-  
+  @Output() onMessageCreated = new EventEmitter<boolean>();
+
   constructor(private messagesService: MessagesService) {
-    
+
   }
 
   ngOnInit() {
   }
-  
-  getEmbedlyData () {
-    
+
+  getEmbedlyData() {
+
     // TODO get embedly
     this.crawled = true;
     this.embedly = true;
     this.message.title = "Lorem ipsum";
     this.message.text = "lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsum";
   }
-  
-  save (){
-    this.messagesService.save(this.message).then(()=> this.message= new Message());
-  }
 
+  save() {
+    this.messagesService.save(this.message)
+      .then(() => {
+        this.onMessageCreated.emit(true);
+        this.message = new Message()
+      });
+  }
 }

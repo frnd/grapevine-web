@@ -7,7 +7,7 @@
 </md-toolbar>
 
 <div class="form" *ngIf="formShowing">
-  <gv-message-editor [wizard]="false"></gv-message-editor>
+  <gv-message-editor [wizard]="false" (onMessageCreated)="onMessageCreated($event)"></gv-message-editor>
 </div>
 
 <div class="card-container">

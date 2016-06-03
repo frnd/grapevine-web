@@ -7,13 +7,6 @@ import { environment } from './environment';
 @Injectable()
 export class MessagesService {
 
-  latest: Message[] = [
-    { id: '1', user: "Pote", uri: '', title: 'Noticia 1', text: '1234', thumbnail: '', tags: null, root: '1', latest: null, date: new Date() },
-    { id: '2', user: "Pepe", uri: '', title: 'Noticia 2', text: 'qwer', thumbnail: '', tags: null, root: '2', latest: null, date: new Date() },
-    { id: '3', user: "Risi", uri: '', title: 'Noticia 3', text: 'asdf', thumbnail: '', tags: null, root: '3', latest: null, date: new Date() },
-    { id: '4', user: "Vivi", uri: '', title: 'Noticia 4', text: 'fhgkjf', thumbnail: '', tags: null, root: '4', latest: null, date: new Date() },
-  ];
-
   constructor(private http: Http) { }
 
   getMessages(page: number, pageSize: number): Promise<PagedResource<Message>> {

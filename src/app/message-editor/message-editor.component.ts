@@ -5,6 +5,7 @@ import {MdInput} from '@angular2-material/input';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import { Message } from '../shared';
 import { MessagesService } from '../messages.service';
+import { EmbedlyService } from '../embedly.service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,7 @@ import { MessagesService } from '../messages.service';
     MdInput,
     MdIcon
   ],
-  providers: [MdIconRegistry, MessagesService],
+  providers: [MdIconRegistry, MessagesService, EmbedlyService],
 
 })
 export class MessageEditorComponent implements OnInit {
@@ -28,7 +29,7 @@ export class MessageEditorComponent implements OnInit {
   embedly: boolean = false;
   crawled: boolean = false;
 
-  constructor(private messagesService: MessagesService) {
+  constructor(private messagesService: MessagesService, private embedlyService: EmbedlyService) {
 
   }
 
@@ -37,15 +38,27 @@ export class MessageEditorComponent implements OnInit {
 
   getEmbedlyData() {
 
-    // TODO get embedly
-    this.crawled = true;
-    this.embedly = true;
-    this.message.title = "Lorem ipsum";
-    this.message.text = "lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsum";
+    this.embedlyService.extract(this.message.uri)
+      .then((data) => {
+        this.crawled = true;
+        this.embedly = true;
+        this.message.title = data.title;
+        this.message.text = data.description;
+        this.message.tags = data.keywords;
+        this.tags = this.message.tags.join(' ,');
+        if(data.images && data.images.length){
+          this.message.thumbnail = data.images[0].url;
+        }
+      })
+      .catch(() => {
+        this.crawled = true;
+        this.embedly = false;
+      });
+
   }
-  
-  updateTags(tags: String){
-    this.message.tags = tags.split(',').map((tag)=>tag.trim());
+
+  updateTags(tags: String) {
+    this.message.tags = tags.split(',').map((tag) => tag.trim());
   }
 
   save() {

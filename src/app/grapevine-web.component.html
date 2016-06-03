@@ -6,11 +6,8 @@
     </button>
 </md-toolbar>
 
-<div class="form" *ngIf="formShowing">
-  <gv-message-editor [wizard]="false" (onMessageCreated)="onMessageCreated($event)"></gv-message-editor>
-</div>
-
 <div class="card-container">
+  <gv-message-editor *ngIf="formShowing" [wizard]="true" (onMessageCreated)="onMessageCreated($event)"></gv-message-editor>
   <md-card *ngFor="let msg of latest">
     <md-card-header>
       <img md-card-avatar src="images/user_male.png">

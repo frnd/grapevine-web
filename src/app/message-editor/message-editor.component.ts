@@ -21,12 +21,12 @@ import { MessagesService } from '../messages.service';
 
 })
 export class MessageEditorComponent implements OnInit {
-  message: Message = new Message();
-  tags: String;
-  embedly: boolean = false;
   @Input('wizard') wizard: boolean;
-  crawled: boolean = false;
   @Output() onMessageCreated = new EventEmitter<boolean>();
+  message: Message = new Message();
+  tags: String = '';
+  embedly: boolean = false;
+  crawled: boolean = false;
 
   constructor(private messagesService: MessagesService) {
 
@@ -43,12 +43,17 @@ export class MessageEditorComponent implements OnInit {
     this.message.title = "Lorem ipsum";
     this.message.text = "lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsum";
   }
+  
+  updateTags(tags: String){
+    this.message.tags = tags.split(',').map((tag)=>tag.trim());
+  }
 
   save() {
     this.messagesService.save(this.message)
       .then(() => {
         this.onMessageCreated.emit(true);
-        this.message = new Message()
+        this.message = new Message();
+        this.tags = '';
       });
   }
 }

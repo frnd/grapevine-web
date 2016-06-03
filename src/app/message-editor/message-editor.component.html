@@ -1,16 +1,16 @@
 <md-card>
-  <md-card-title>Create your dog's profile</md-card-title>
+  <md-card-title>Got anything interesting to share?</md-card-title>
   <md-card-content>
     <div>
       <form>
-        <div>
+        <div class="url-input">
           <md-input placeholder="Url" [(ngModel)]="message.uri"></md-input>
           <button md-raised-button color="accent" (click)="getEmbedlyData()" *ngIf="wizard">GET</button>
         </div>
-        <div *ngIf="(wizard && crawled) || !wizard">
+        <div  class="info-input" *ngIf="(wizard && crawled) || !wizard">
           <md-input placeholder="Title" [(ngModel)]="message.title"></md-input>
-          <md-input placeholder="{{wizard ? 'Description' : 'Text'}}" [(ngModel)]="message.text"></md-input>
-          <md-input placeholder="Tags" [(ngModel)]="tags"></md-input>
+          <textarea placeholder="{{wizard ? 'Description' : 'Text'}}" [(ngModel)]="message.text"></textarea>
+          <md-input placeholder="Tags" #tags (change)="updateTags(tags.value)"></md-input>
           <p *ngIf="embedly">Information provided by Embedly</p>
         </div>
       </form>

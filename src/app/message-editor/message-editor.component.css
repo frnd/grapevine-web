@@ -1,0 +1,28 @@
+.info-input {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.info-input * {
+    width: 100%;
+}
+
+.url-input{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.url-input md-input,
+.url-input button{
+  flex-basis:auto;
+}
+
+.url-input md-input{
+  flex-grow: 2;
+}

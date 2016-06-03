@@ -7,6 +7,12 @@ import { Message } from '../shared';
 import { MessagesService } from '../messages.service';
 import { EmbedlyService } from '../embedly.service';
 
+enum CrawlState {
+    NONE = 1,
+    CRAWLING,
+    COMPLETE
+}
+
 @Component({
   moduleId: module.id,
   selector: 'gv-message-editor',
@@ -27,7 +33,8 @@ export class MessageEditorComponent implements OnInit {
   message: Message = new Message();
   tags: String = '';
   embedly: boolean = false;
-  crawled: boolean = false;
+  crawled: CrawlState = CrawlState.NONE;
+  crawledEnum = CrawlState;
 
   constructor(private messagesService: MessagesService, private embedlyService: EmbedlyService) {
 
@@ -37,10 +44,10 @@ export class MessageEditorComponent implements OnInit {
   }
 
   getEmbedlyData() {
-
+    this.crawled = CrawlState.CRAWLING;
     this.embedlyService.extract(this.message.uri)
       .then((data) => {
-        this.crawled = true;
+        this.crawled = CrawlState.COMPLETE;
         this.embedly = true;
         this.message.title = data.title;
         this.message.text = data.description;
@@ -51,7 +58,7 @@ export class MessageEditorComponent implements OnInit {
         }
       })
       .catch(() => {
-        this.crawled = true;
+        this.crawled = CrawlState.COMPLETE;
         this.embedly = false;
       });
 

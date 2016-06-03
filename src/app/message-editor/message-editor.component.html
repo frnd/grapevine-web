@@ -5,13 +5,19 @@
       <form>
         <div class="url-input">
           <md-input placeholder="Url" [(ngModel)]="message.uri"></md-input>
-          <button md-raised-button color="accent" (click)="getEmbedlyData()" *ngIf="wizard">GET</button>
+          <button md-icon-button color="accent" (click)="getEmbedlyData()" *ngIf="wizard">
+            <md-icon *ngIf="crawled==crawledEnum.NONE">get_app</md-icon>
+            <md-icon *ngIf="crawled==crawledEnum.CRAWLING">loop</md-icon>
+            <md-icon *ngIf="crawled==crawledEnum.COMPLETE">done</md-icon>
+            GET
+          </button>
         </div>
-        <div  class="info-input" *ngIf="(wizard && crawled) || !wizard">
+        <div  class="info-input" *ngIf="(wizard && crawled==crawledEnum.COMPLETE) || !wizard">
           <md-input placeholder="Title" [(ngModel)]="message.title"></md-input>
           <textarea placeholder="{{wizard ? 'Description' : 'Text'}}" [(ngModel)]="message.text"></textarea>
           <md-input placeholder="Tags" #tags (change)="updateTags(tags.value)"></md-input>
-          <p *ngIf="embedly">Information provided by Embedly</p>
+          <p *ngIf="crawled==crawledEnum.COMPLETE && embedly">Information provided by Embedly</p>
+          <p *ngIf="crawled==crawledEnum.COMPLETE && !embedly">Can not get information on the provided url.</p>
         </div>
       </form>
     </div>
